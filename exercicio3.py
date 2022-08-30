@@ -90,11 +90,11 @@
 # imc = peso / (altura ** 2)
 
 # if(imc < 26):
-#     print(f'IMC: Normal')
+#     print('IMC: Normal')
 # elif(imc >= 26 and imc < 30):
-#     print(f'IMC: Obeso')
+#     print('IMC: Obeso')
 # elif(imc >= 30):
-#     print(f'IMC: Obeso morbido')
+#     print('IMC: Obeso morbido')
 
 # 8. Escreva um programa que tenha a funcionalidade de uma calculadora simples. O programa deve
 # solicitar a digitação de dois operandos e um operador (+ - x * / %) e deve imprimir ao resultado
