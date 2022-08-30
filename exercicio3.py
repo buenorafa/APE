@@ -26,7 +26,8 @@ maior_num = 0
 
 if(num_1 > num_2):
     maior_num = num_1
-maior_num = num_2
+else: 
+    maior_num = num_2
 if(maior_num < num_3):
     maior_num = num_3
 print(f'O maior numero eh: {maior_num}')
@@ -48,14 +49,14 @@ elif(sexo == 'h' or sexo == 'H'):
 # mínimo. Escreva um programa que leia o valor total das vendas de um vendedor e escreva seu
 # salário.
 
-# t_vendas = float(input('Digite o valor total das vendas: '))
-# S_MIN = 1200.00
-# comissao = t_vendas * 0.05
+t_vendas = float(input('Digite o valor total das vendas: '))
+S_MIN = 1200.00
+comissao = t_vendas * 0.05
 
-# if(comissao <=  S_MIN):
-#     print(f'O salario eh: R$ {S_MIN}')
-# else: 
-#     print(f'O salario eh: R$ {comissao:.2f}')
+if(comissao <=  S_MIN):
+    print(f'O salario eh: R$ {S_MIN}')
+else: 
+    print(f'O salario eh: R$ {comissao:.2f}')
 
 # 6. Recomendam-se estudantes para bolsas de estudo em função de seu desempenho.
 # A natureza das recomendações é baseada na seguinte tabela:
@@ -66,15 +67,15 @@ elif(sexo == 'h' or sexo == 'H'):
 # Escreva um programa que leia o nome e o conceito de um estudante e exiba o nome do
 # estudante e sua respectiva recomendação.
 
-# nome = input('Digite o nome do aluno: ')
-# conceito = input('Digite o conceito do aluno (A, B, C ou D): ')
+nome = input('Digite o nome do aluno: ')
+conceito = input('Digite o conceito do aluno (A, B, C ou D): ')
 
-# if(conceito == 'A'):
-#     print(f'O aluno {nome} eh fortemente recomendado')
-# elif(conceito == 'B' or conceito == 'C'):
-#     print(f'O aluno {nome} eh recomendado')
-# elif(conceito == 'D'):
-#     print(f'O aluno {nome} nao eh recomendado')
+if(conceito == 'A'):
+    print(f'O aluno {nome} eh fortemente recomendado')
+elif(conceito == 'B' or conceito == 'C'):
+    print(f'O aluno {nome} eh recomendado')
+elif(conceito == 'D'):
+    print(f'O aluno {nome} nao eh recomendado')
 
 # 7. Escreva um programa que leia o peso (kg) e a altura (m) de uma pessoa, determine e mostre o
 # seu grau de obesidade, de acordo com a tabela seguinte. O grau de obesidade é determinado
@@ -85,16 +86,16 @@ elif(sexo == 'h' or sexo == 'H'):
 #         >= 26 e < 30: Obeso
 #         >= 30: Obeso Morbido 
 
-# peso = float(input('Digite o peso: '))
-# altura = float(input('Digite a altura: '))
-# imc = peso / (altura ** 2)
+peso = float(input('Digite o peso: '))
+altura = float(input('Digite a altura: '))
+imc = peso / (altura ** 2)
 
-# if(imc < 26):
-#     print('IMC: Normal')
-# elif(imc >= 26 and imc < 30):
-#     print('IMC: Obeso')
-# elif(imc >= 30):
-#     print('IMC: Obeso morbido')
+if(imc < 26):
+    print('IMC: Normal')
+elif(imc >= 26 and imc < 30):
+    print('IMC: Obeso')
+elif(imc >= 30):
+    print('IMC: Obeso morbido')
 
 # 8. Escreva um programa que tenha a funcionalidade de uma calculadora simples. O programa deve
 # solicitar a digitação de dois operandos e um operador (+ - x * / %) e deve imprimir ao resultado
