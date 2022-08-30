@@ -1,47 +1,47 @@
 # 1. Escreva um programa que leia um número inteiro e determine se ele é par ou ímpar.
 
-# num = int(input('Digite um numero inteiro: '))
+num = int(input('Digite um numero inteiro: '))
 
-# if(num % 2 == 0):
-#     print(f'O numero {num} eh par')
-# else:
-#     print(f'O numero {num} eh impar')
+if(num % 2 == 0):
+    print(f'O numero {num} eh par')
+else:
+    print(f'O numero {num} eh impar')
 
 # 2. Escreva um programa que leia dois números e exiba-os em ordem crescente.
 
-# num_1 = float(input('Digite o primeiro numero: '))
-# num_2 = float(input('Digite o segundo numero: '))
+num_1 = float(input('Digite o primeiro numero: '))
+num_2 = float(input('Digite o segundo numero: '))
 
-# if(num_1 < num_2):
-#     print(f'{num_1} {num_2}')
-# else:
-#     print(f'{num_2} {num_1}')
+if(num_1 < num_2):
+    print(f'{num_1} {num_2}')
+else:
+    print(f'{num_2} {num_1}')
 
 # 3. Escreva um programa que leia 3 números inteiros, determine e mostre o maior deles.
 
-# num_1 = int(input('Digite o primeiro numero inteiro: '))
-# num_2 = int(input('Digite o segundo numero inteiro: '))
-# num_3 = int(input('Digite o terceiro numero inteiro: '))
-# maior_num = 0
+num_1 = int(input('Digite o primeiro numero inteiro: '))
+num_2 = int(input('Digite o segundo numero inteiro: '))
+num_3 = int(input('Digite o terceiro numero inteiro: '))
+maior_num = 0
 
-# if(num_1 > num_2):
-#     maior_num = num_1
-# maior_num = num_2
-# if(maior_num < num_3):
-#     maior_num = num_3
-# print(f'O maior numero eh: {maior_num}')
+if(num_1 > num_2):
+    maior_num = num_1
+maior_num = num_2
+if(maior_num < num_3):
+    maior_num = num_3
+print(f'O maior numero eh: {maior_num}')
 
 # 4. Escreva um programa que leia o nome e o sexo (M ou F) de uma pessoa e exiba a mensagem
 # "Olá, Sr. Fulano!" ou "Olá, Sra. Fulana!", de acordo com o sexo da pessoa. Obs: Fulano e Fulana
 # são nomes exemplos.
 
-# nome = input('Digite o seu nome: ')
-# sexo = input('Se for mulher digite M, se for homem digite H: ')
+nome = input('Digite o seu nome: ')
+sexo = input('Se for mulher digite M, se for homem digite H: ')
 
-# if(sexo == 'm' or sexo == 'M'):
-#     print(f'Ola, Sra. {nome}')
-# elif(sexo == 'h' or sexo == 'H'):
-#     print(f'Ola, Sr. {nome}')
+if(sexo == 'm' or sexo == 'M'):
+    print(f'Ola, Sra. {nome}')
+elif(sexo == 'h' or sexo == 'H'):
+    print(f'Ola, Sr. {nome}')
 
 # 5. A empresa Vende Tudo Ltda paga o salário de cada vendedor com uma comissão de 5% sobre o
 # total de vendas daquele vendedor, mas essa comissão nunca deve ser inferior ao salário-
