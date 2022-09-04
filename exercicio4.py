@@ -35,7 +35,7 @@ if(re.search('[a-zA-Z]', char)):
 elif(re.search('[0-9]', char)):
     print('Numero')
 else:
-    print('Caractere')
+    print('Caractere especial')
 
 # 3. Escreva um programa que solicite a digitação de um ano e imprima sua classificação como
 # bissexto ou não bissexto.
