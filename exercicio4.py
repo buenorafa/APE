@@ -28,7 +28,7 @@ import re
 char = input('Digite um caractere: ')
 
 if(re.search('[a-zA-Z]', char)):
-    if(re.search('[aeiou]')):
+    if(re.search('[aeiou]', char)):
         print('Vogal')
     else:
         print('Consoante')
