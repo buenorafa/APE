@@ -19,6 +19,7 @@ def define_telefone():
             return telefone
         else:
             print('Telefone inválido. Digite novamente.')
+            clear(3)
 
 # Retorna a senha de 6 caracteres
 def define_senha():
@@ -37,6 +38,7 @@ def verifica_arq(arq):
 # Cria um novo usuário -> Um arquivo da agenda e um arquivo da senha 
 def registrar_usuario():
     # Verificação do Login
+    clear(.5)
     while True:
         num_telefone = define_telefone()
         # AQUI VAI FICAR A AGENDA DO USUÁRIO
@@ -71,10 +73,13 @@ def menu_inicial():
         elif entrada == '2':
             registrar_usuario()
         elif entrada == '3':
+            clear(1)
             print('Programa encerrado.')
+            clear(1)
             break
         else:
             print('\nOpção inválida. Por favor, tente novamente.')
+            clear(1)
         print()
 
 menu_inicial()
