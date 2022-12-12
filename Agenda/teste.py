@@ -138,6 +138,7 @@ def menu_principal(arquivo):
     print()
     entrada = input('Digite a opção desejada: ')
     
+    
     if entrada == '1':
         adicionar_contato(arq)
     elif entrada == '2':
