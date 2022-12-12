@@ -15,19 +15,25 @@ def clear(delay):
 # Retorna um telefone de 11 dígitos numéricos
 def define_telefone():
     while True:
-        telefone = input('Digite o telefone (Ex: 83988889999): ')
+        clear(.3)
+        print('Formato do telefone: ddd + 9 + telefone sem separação')
+        print('Digite \'exit\' p/ sair.')
+        print()
+        telefone = input('Digite o telefone: ')
         if telefone == 'exit':
-            return 'exit'
+            return
         if len(telefone) == 11 and telefone.isalnum():
             return telefone
         else:
             print('Telefone inválido. Digite novamente.')
-            clear(1)
+            clear(.5)
 
 # Retorna a senha de 6 caracteres
 def define_senha():
     while True:
-        senha = input('Digite a senha de 6 caracteres: ')
+        senha = input('Digite a senha de 6 caracteres (Digite \'exit\' p/ sair): ')
+        if senha == 'exit':
+            return
         if len(senha) == 6:
             return senha
         else:
@@ -43,17 +49,18 @@ def verifica_arq(arq):
 def entrar():
     # Verificação do Login 
     while True:
+        clear(.3)
         # Entra com o numero cadastrado
-        login = input('Digite o login: ')
+        login = input('Digite o login (Digite \'exit\' p/ sair): ')
         if login == 'exit':
-            clear(0)
+            clear(.5)
             return
         # Adiciona o caminho do arquivo de agenda
         arq = login + '.agenda.txt'
         # Se não encontrar
         if not verifica_arq(arq):
             print('Login incorreto. Tente novamente.')
-            clear(1)
+            clear(.5)
         else:
             break
     # Caminho do arquivo de senha 
@@ -63,23 +70,24 @@ def entrar():
         chave = f.read()
     # Validação da senha
     while True:
-        senha = input('Digite a senha: ')
+        senha = input('Digite a senha (Digite \'exit\' p/ sair): ')
+        if senha == 'exit':
+            return
         if senha != chave:
             print('Senha inválida. Digite novamente.')
-            clear(1)
+            clear(.5)
         else:
             print('Senha validada com sucesso')
-            clear(1)
-            menu_principal(arq)
-            break
+            clear(.5)
+            return arq
 
 # Cria um novo usuário -> Um arquivo da agenda e um arquivo da senha 
 def registrar_usuario():
     # Verificação do Login
-    clear(1)
+    # clear(.3)
     while True:
         num_telefone = define_telefone()
-        if num_telefone == 'exit':
+        if num_telefone == None:
             return
         # AQUI VAI FICAR A AGENDA DO USUÁRIO
         arq_agenda = num_telefone + '.agenda.txt'
@@ -93,6 +101,8 @@ def registrar_usuario():
             break
     # Verificação da senha
     senha = define_senha()
+    if senha == None:
+        return
     with open(arq_agenda, 'w') as agenda:
         pass
     with open(arq_senha, 'w') as s:
@@ -100,9 +110,12 @@ def registrar_usuario():
 
 # Menu principal
 def adicionar_contato(arquivo):
+    clear(.3)
     nome = input('Digite o nome do contato: ')
+    if nome == 'exit':
+        return
     numero = define_telefone()
-    if numero == 'exit':
+    if numero == None:
         return
     contato = nome + '\t\t' + numero
     with open(arquivo, 'a') as f:
@@ -112,6 +125,7 @@ def adicionar_contato(arquivo):
 def menu_principal(arquivo):
   arq = arquivo
   while True:
+    clear(.3)
     print('Opções disponíveis:')
     print()
     print('[1] Adicionar Contato')
@@ -123,6 +137,7 @@ def menu_principal(arquivo):
     print('[7] Sair')
     print()
     entrada = input('Digite a opção desejada: ')
+    
     
     if entrada == '1':
         adicionar_contato(arq)
@@ -143,9 +158,7 @@ def menu_principal(arquivo):
         #excluir_conta_usuario()
         pass
     elif entrada == '7':
-        
-        print('Voltando ao menu inicial.')
-        menu_inicial()
+        return 
     else:
         print('\nOpção inválida. Por favor, tente novamente.')
     print()
@@ -163,16 +176,11 @@ def menu_inicial():
         entrada = input('Digite a opção desejada: ')
         print()
         if entrada == '1':
-            # Func entrar
-            clear(0)
-            entrar()
+            return 1
         elif entrada == '2':
-            registrar_usuario()
+            return 2
         elif entrada == '3':
-            clear(0)
-            print('Programa encerrado.')
-            clear(1)
-            break
+            return 3
         else:
             clear(0)
             print('\nOpção inválida. Por favor, tente novamente.')
@@ -180,5 +188,27 @@ def menu_inicial():
         print()
 
 
+# MAIN FUNCTION
+def main():
+    while True:
+        menu = menu_inicial()
+        if menu == 1:
+            # Recebe a func entrar
+            login = entrar()
+            if login == None:
+                # clear(.5)
+                # volta pro inicial
+                pass
+            else:
+                menu_principal(login)
+                clear(.5)
+        elif menu == 2:
+            registrar_usuario()
+            clear(.5)
+        elif menu == 3:
+            clear(0)
+            print('Programa encerrado.')
+            clear(.5)
+            break
 
-menu_inicial()
+main()
