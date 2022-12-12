@@ -56,7 +56,6 @@ def registrar_usuario():
     with open(arq_senha, 'w') as s:
         s.write(senha)
 
-
 #função menu inicial
 def menu_inicial():
     while True:
