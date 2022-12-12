@@ -116,16 +116,42 @@ def adicionar_contato(arquivo):
     numero = define_telefone()
     if numero == None:
         return
-    contato = nome + '\t\t' + numero
+    contato = nome + ':' + numero + '\n'
     with open(arquivo, 'a') as f:
         f.write(contato)
+
+def formata_telefone(numero):
+    return '(' +  numero[:2] + ')' + numero[2:7] + '-'+ numero[7:]  
+
+def listar_contatos(arquivo):
+    with open(arquivo, 'r') as f:
+        lista = f.read()
+    lista = lista.split('\n')
+    tamanho = len(lista) - 1
+    lista = lista[:tamanho]
+    lista.sort()
+    # print(lista)
+    # lista = lista.sort(reverse=False)
+    # exclui o ultimo elemento 
+    n = len(lista)
+    lista_ordenada = [None]*n
+    for i in range(n):
+        aux = lista[i]
+        aux = aux.split(':')
+        nome = aux[0]
+        telefone = formata_telefone(aux[1])
+        saida = nome + '\t' + telefone
+        lista_ordenada[i] = saida
+
+    return lista_ordenada   
+    # print(lista)
 
 #Entrar Menu Principal -> Sem retorno
 # Nenhuma das funções abaixo precisa de retorno
 def menu_principal(arquivo):
   arq = arquivo
   while True:
-    clear(.3)
+    # clear(.3)
     print('Opções disponíveis:')
     print()
     print('[1] Adicionar Contato')
@@ -142,9 +168,9 @@ def menu_principal(arquivo):
     if entrada == '1':
         adicionar_contato(arq)
     elif entrada == '2':
-        pass
-        #listar_contatos()
-        pass
+        lista_ordenada = listar_contatos(arq)
+        for i in lista_ordenada:
+            print(i)
     elif entrada == '3':
         #pesquisar_contato()
         pass
