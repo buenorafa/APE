@@ -1,6 +1,7 @@
 import os
 from time import sleep 
 
+# UTILITÁRIO
 
 # Func. de limpar o terminal -> clear(tempo em s de delay)
 def clear(delay):
@@ -44,7 +45,9 @@ def define_senha():
 def verifica_arq(arq):
     return os.path.isfile(arq)
 
-# Func entrar -> Login ou None 
+# MENU INICIAL 
+
+# 1 Func entrar -> Login ou None 
 def entrar():
     # Verificação do Login 
     while True:
@@ -80,7 +83,7 @@ def entrar():
             clear(.5)
             return arq
 
-# Cria um novo usuário -> Cria um arquivo da agenda e um arquivo da senha [SEM RETORNO]
+# 2 Cria um novo usuário -> Cria um arquivo da agenda e um arquivo da senha [SEM RETORNO]
 def registrar_usuario():
     # Verificação do Login
     # clear(.3)
@@ -107,7 +110,22 @@ def registrar_usuario():
     with open(arq_senha, 'w') as s:
         s.write(senha)
 
-# Menu principal
+# MENU PRINCIPAL:
+
+# ARQUIVO EM ORDEM ALFABÉTICA -> DEVE SER CHAMADO APÓS ADIÇÃO / MODIFICAÇÃO / EXCLUSÃO DE UM CONTATO
+def ordena_arquivo(arquivo):
+    with open(arquivo, 'r') as f:
+        lista = f.read()
+    lista = lista.split('\n')
+    # Remove o último elemento da lista (Elemento vazio)
+    tamanho = len(lista) - 1
+    lista = lista[:tamanho]
+    # Organiza em ordem alfabética
+    lista.sort()
+    with open(arquivo, 'w') as f:
+        for i in lista:
+            f.write(i + '\n')
+
 def adicionar_contato(arquivo):
     clear(.3)
     nome = input('Digite o nome do contato: ')
@@ -120,31 +138,97 @@ def adicionar_contato(arquivo):
     with open(arquivo, 'a') as f:
         f.write(contato)
 
+# FORMATA -> (83) 98888-8888
 def formata_telefone(numero):
-    return '(' +  numero[:2] + ')' + numero[2:7] + '-'+ numero[7:]  
+    return '(' +  numero[:2] + ')' + ' ' + numero[2:7] + '-'+ numero[7:]  
 
-def listar_contatos(arquivo):
+# EXIBE UMA LISTA DE CONTATOS
+def exibe_lista(lista):
+    lista = lista.split('\n')
+    print('Lista de Contatos: ')
+    print()
+    tamanho = len(lista)
+    print()
+    for i in range(tamanho):
+        if lista[i] != '':
+            aux = lista[i]
+            aux = aux.split(':')
+            nome = aux[0]
+            telefone = formata_telefone(aux[1])
+            print(nome + '\t\t' + telefone)
+    print()
+
+def lista_contatos(arquivo):
     with open(arquivo, 'r') as f:
         lista = f.read()
-    lista = lista.split('\n')
-    tamanho = len(lista) - 1
-    lista = lista[:tamanho]
-    lista.sort()
-    # print(lista)
-    # lista = lista.sort(reverse=False)
-    # exclui o ultimo elemento 
-    n = len(lista)
-    lista_ordenada = [None]*n
-    for i in range(n):
-        aux = lista[i]
-        aux = aux.split(':')
-        nome = aux[0]
-        telefone = formata_telefone(aux[1])
-        saida = nome + '\t' + telefone
-        lista_ordenada[i] = saida
+    exibe_lista(lista)
+    entrada = input('Digite \'exit\' p/ sair: ')
+    if entrada == 'exit':
+        return
 
-    return lista_ordenada   
-    # print(lista)
+def pesquisar_contato(arquivo):
+    with open(arquivo, 'r') as f:
+        lista = f.read()
+    # SEPARAMOS OS CONTATOS EM UMA LISTA
+    lista = lista.split('\n')
+    while True:
+        clear(.3)
+        print('Pesquisa:')
+        print()
+        # RECEBE O NOME DO CONTATO A SER PESQUISADO
+        entrada = input('Digite o nome do contato (Digite \'exit\' p/ sair): ')
+        if entrada == 'exit':
+                clear(.3)
+                return
+        # OS CONTATOS ENCONTRADOS SERÃO SALVOS NESSA STRING
+        lista_da_pesquisa = ''
+        print()
+        for i in lista:
+            # PARA EXCLUIR O ELEMENTO NULO
+            if i != '':
+                if i.lower().find(entrada.lower()) != -1:
+                    # AQUI SALVAMOS OS CONTATOS ENCONTRADOS + \n P/ UTILIZAR A FUNC EXIBE LISTA
+                    lista_da_pesquisa += i + '\n'
+        if lista_da_pesquisa != '':
+            clear(.3)
+            exibe_lista(lista_da_pesquisa)
+            entrada = input('Digite \'exit\' p/ sair ou qualquer tecla p/ voltar: ')
+            if entrada == 'exit':
+                clear(.3)
+                return
+        else:
+            clear(0)
+            print('Usuário não encontrado. Tente novamente!')
+            clear(.5) 
+
+def remover_contato(arq):
+    pass
+
+def alterar_contato(arq):
+    pass
+
+def remover_usuario(arquivo):
+    print('Excluir conta: ')
+    print()
+    print('Deseja excluir permanentemente sua conta?')
+    print()
+    print('Pressione \'S\' p/ excluir ou qualquer tecla p/ voltar.')
+    entrada = input('Esse processo não poderá ser revertido: ')
+    if entrada.lower() == 's':
+        login = entrar()
+        if login == arquivo:
+            arq = login
+            login = login.split('.agenda.txt')
+            arq_senha = login[0] + '.senha.txt'
+            os.remove(arq)
+            os.remove(arq_senha)
+            return -1
+        else:
+            print('Não foi possível excluir sua conta. Tente novamente!')
+            return
+    else:
+        return
+
 
 #Entrar Menu Principal -> Sem retorno
 # Nenhuma das funções abaixo precisa de retorno
@@ -163,17 +247,13 @@ def menu_principal(arquivo):
     print('[7] Sair')
     print()
     entrada = input('Digite a opção desejada: ')
-    
-    
     if entrada == '1':
         adicionar_contato(arq)
+        ordena_arquivo(arq)
     elif entrada == '2':
-        lista_ordenada = listar_contatos(arq)
-        for i in lista_ordenada:
-            print(i)
+        lista_contatos(arq)
     elif entrada == '3':
-        #pesquisar_contato()
-        pass
+        pesquisar_contato(arq)
     elif entrada == '4':
         #remover_contato()
         pass
@@ -181,8 +261,9 @@ def menu_principal(arquivo):
         #alterar_contato()
         pass
     elif entrada == '6':
-        #excluir_conta_usuario()
-        pass
+       remover = remover_usuario(arq)
+       if remover == -1:
+        return
     elif entrada == '7':
         return 
     else:
@@ -238,3 +319,12 @@ def main():
             break
 
 main()
+# lista_contatos('83988888888.agenda.txt')
+# pesquisar_contato('83988888888.agenda.txt')
+
+
+
+
+
+
+
