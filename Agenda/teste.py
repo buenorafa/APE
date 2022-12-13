@@ -155,8 +155,24 @@ def exibe_lista(lista):
             aux = aux.split(':')
             nome = aux[0]
             telefone = formata_telefone(aux[1])
-            print(nome + '\t\t' + telefone)
+            print(f'{nome}      {telefone}')
     print()
+
+def exibe_lista_num(lista):
+    lista = lista.split('\n')
+    print('Lista de Contatos: ')
+    print()
+    tamanho = len(lista)
+    print()
+    for i in range(tamanho):
+        if lista[i] != '':
+            aux = lista[i]
+            aux = aux.split(':')
+            nome = aux[0]
+            telefone = formata_telefone(aux[1])
+            print(f'{i + 1} {nome}      {telefone}')
+    print()
+
 
 def lista_contatos(arquivo):
     with open(arquivo, 'r') as f:
@@ -202,7 +218,33 @@ def pesquisar_contato(arquivo):
             clear(.5) 
 
 def remover_contato(arq):
-    pass
+    
+    login = arq.split('.agenda.txt')
+    login = login[0]
+    print('Login: ' + login)
+    with open(arq, 'r') as f:
+        lista = f.read()
+    exibe_lista_num(lista)
+    lista = lista.split('\n')
+    lista = lista[:len(lista) - 1]
+    while True:
+        entrada = input('Digite o nº do usuário a ser removido (Digite \'exit\' p/ sair): ')
+        if entrada == 'exit':
+            return
+        if entrada.isdigit():
+            entrada = int(entrada)
+            if entrada - 1 <= len(lista):
+                del lista[entrada - 1]
+                print('Contato removido com sucesso')
+                # print(lista)
+                with open(arq, 'w') as f:
+                    for i in lista:
+                        f.write(i + '\n')
+                return
+            else: 
+                print('Contato inválido. Tente novamente. ')
+        else:
+            print('Contato inválido. Tente novamente. ')
 
 def alterar_contato(arq):
     pass
@@ -255,8 +297,8 @@ def menu_principal(arquivo):
     elif entrada == '3':
         pesquisar_contato(arq)
     elif entrada == '4':
-        #remover_contato()
-        pass
+        remover_contato(arq)
+        # ordena_arquivo(arq)
     elif entrada == '5':
         #alterar_contato()
         pass
@@ -321,10 +363,7 @@ def main():
 main()
 # lista_contatos('83988888888.agenda.txt')
 # pesquisar_contato('83988888888.agenda.txt')
-
-
-
-
+# remover_contato('83988888888.agenda.txt')
 
 
 
