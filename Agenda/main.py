@@ -432,7 +432,7 @@ def menu_principal(arquivo):
     print('[6] Excluir Conta do Usuário')
     print('[7] Sair')
     print()
-    
+
     entrada = input('Digite a opção desejada: ')
     if entrada == '1':
         adicionar_contato(arq)
@@ -465,6 +465,16 @@ def menu_principal(arquivo):
 # (): []
 # -> []
 def main():
+    # Apenas uma tela de entrada
+    clear(0)
+    print('\
+    _ ______               ________ \n\
+   (_) ____/__  ____  ____/ / ____ \ \n\
+  / / / __/ _ \/ __ \/ __  / / __ `/ \n\
+ / / /_/ /  __/ / / / /_/ / / /_/ / \n\
+/_/\____/\___/_/ /_/\__,_/\ \__,_/ \n\
+                           \____/ \n')
+    clear(2)
     while True:
         menu = menu_inicial()
         if menu == 1:
