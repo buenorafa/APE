@@ -27,7 +27,7 @@ def define_telefone():
         telefone = input('Digite o telefone: ')
         if telefone == 'exit':
             return
-        if len(telefone) == 11 and telefone.isalnum():
+        if len(telefone) == 11 and telefone.isdigit():
             return telefone
         else:
             print('Telefone inválido. Digite novamente.')
@@ -122,7 +122,7 @@ def entrar():
     while True:
         clear(.3)
         # Entra com o numero cadastrado
-        login = input('Digite o login (Digite \'exit\' p/ votar): ')
+        login = input('Digite o login (Digite \'exit\' p/ voltar): ')
         if login == 'exit':
             clear(.5)
             return
@@ -186,14 +186,15 @@ def registrar_usuario():
 # -> Opção escolhida pelo usuário - int [1, 2, 3]
 def menu_inicial():
     while True:
-        print('Menu Inicial: ')
-        print()
-        print('[1] Entrar')
-        print('[2] Registrar Usuário')
-        print('[3] Sair')
-        print()
+        print('''
+        Menu Inicial:
+
+        [1] Entrar
+        [2] Registrar Usuário
+        [3] Sair
+
+        ''')
         entrada = input('Digite a opção desejada: ')
-        print()
         if entrada == '1':
             return 1
         elif entrada == '2':
@@ -390,12 +391,14 @@ def alterar_contato(arq):
 # -> []
 def remover_usuario(arquivo):
     clear(.3)
-    print('Excluir conta: ')
-    print()
-    print('Deseja excluir permanentemente sua conta?')
-    print()
-    print('Esse processo não poderá ser revertido!')
-    print()
+    print(''''
+    Excluir conta:
+
+    Deseja excluir permanentemente sua conta?
+
+    Esse processo não poderá ser revertido!
+    
+    ''')
     entrada = input('Pressione \'S\' p/ continuar ou qualquer tecla p/ voltar: ')
     # Caso o usuário deseje continuar com a exclusão, será realizado uma nova verificação
     if entrada.lower() == 's':
@@ -421,18 +424,18 @@ def menu_principal(arquivo):
   arq = arquivo
   while True:
     clear(.3)
+    print('''
+    Opções disponíveis:
+    
+    [1] Adicionar Contato
+    [2] Listar Contatos
+    [3] Pesquisar Contato
+    [4] Remover Contato
+    [5] Alterar Contato
+    [6] Excluir Conta do Usuário
+    [7] Sair
 
-    print('Opções disponíveis:')
-    print()
-    print('[1] Adicionar Contato')
-    print('[2] Listar Contatos')
-    print('[3] Pesquisar Contato')
-    print('[4] Remover Contato')
-    print('[5] Alterar Contato')
-    print('[6] Excluir Conta do Usuário')
-    print('[7] Sair')
-    print()
-
+    ''')
     entrada = input('Digite a opção desejada: ')
     if entrada == '1':
         adicionar_contato(arq)
@@ -467,13 +470,14 @@ def menu_principal(arquivo):
 def main():
     # Apenas uma tela de entrada
     clear(0)
-    print('\
-    _ ______               ________ \n\
-   (_) ____/__  ____  ____/ / ____ \ \n\
-  / / / __/ _ \/ __ \/ __  / / __ `/ \n\
- / / /_/ /  __/ / / / /_/ / / /_/ / \n\
-/_/\____/\___/_/ /_/\__,_/\ \__,_/ \n\
-                           \____/ \n')
+    print('''
+    _ ______               ________ 
+   (_) ____/__  ____  ____/ / ____ \ 
+  / / / __/ _ \/ __ \/ __  / / __ `/ 
+ / / /_/ /  __/ / / / /_/ / / /_/ / 
+/_/\____/\___/_/ /_/\__,_/\ \__,_/ 
+                           \____/ 
+    ''')
     clear(2)
     while True:
         menu = menu_inicial()
