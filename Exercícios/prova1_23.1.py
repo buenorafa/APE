@@ -3,21 +3,40 @@
 
 '''
 # O primeiro passo é pegar as 3 notas
-# Abaixo eu atribuo o valor da primeira nota a variável menor e nota1, dessa forma a cada nota que o usuário digitar eu já vou atualizando quem o menor
+# Abaixo eu atribuo o valor da primeira nota a variável menor e nota1, dessa forma a cada nota que o usuário digitar eu já vou atualizando quem o menor.
 menor = nota1 = float(input('Digita a nota 1: '))
-nota2 = float(input('Digita a nota 2: '))
+nota2 = int(input('Digita a nota 2: '))
 # Pego a nota2 e verifico se ela é menor que a variável menor
 if nota2 < menor:
     menor = nota2
 # Mesmo caso p/ nota3
-nota3 = float(input('Digita a nota 3: '))
+nota3 = int(input('Digita a nota 3: '))
 if nota3 < menor:
     menor = nota3
 # Aqui irei calcular a soma das notas, somo as 3 notas e diminuo a menor nota
 total = nota1 + nota2 + nota3 - menor
 # Por fim, calculamos a média
 media = total/2
+
+# Agora iremos calcular o conceito e o resultado
+conceito = ''
+# O resultado começa como Aprovado, caso o conceito seja D ou E atualizamos o valor para 'Reprovado'
+resultado = 'Aprovado'
+if media >= 90 and media <= 100:
+    conceito = 'A'
+elif media >= 70 and media < 90:
+    conceito = 'B'
+elif media >= 60 and media < 80:
+    conceito = 'C'
+elif media >= 40 and media < 60:
+    conceito = 'D'
+    resultado = 'Reprovado'
+else:
+    conceito = 'E'
+    resultado = 'Reprovado'
+
 print(f'Média: {media}')
+print(f'Conceito: {conceito}\nResultado: {resultado}')
 
 '''
 2. Ler 100 numeros, mostrar o nº de pares o nº de impares, e também o maior par e o  maior impar
